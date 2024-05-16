@@ -35,41 +35,46 @@
             border: none;
             border-radius: 3px;
             cursor: pointer;
+            text-decoration: none;
         }
         .create-link {
             display: block;
             margin-top: 10px;
         }
+        .back-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-<div th:switch="${users}">
-    <h2 th:case="null">No users found!</h2>
+<div th:switch="${logs}">
+    <h2 th:case="null">No logs found!</h2>
     <div th:case="*">
-        <h2>Users</h2>
+        <h2>User Logs</h2>
         <table>
             <thead>
             <tr>
-                <th>Id</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th> </th>
-                <th> </th>
+                <th>Timestamp</th>
+                <th>Log Message</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td><a th:href="@{user-update/{id}(id=${user.id})}">Edit</a></td>
-                <td><a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+            <tr th:each="log : ${logs}">
+                <td th:text="${log.timestamp}"></td>
+                <td th:text="${log.message}"></td>
             </tr>
             </tbody>
         </table>
+        <a class="back-button" href="/users">Назад</a>
     </div>
-    <a class="create-link" href="/user-create">Create user</a>
-    <a class="create-link" href="/logs">View Logs</a>
 </div>
 </body>
 </html>
